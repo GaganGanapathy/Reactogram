@@ -1,0 +1,8 @@
+.profile-pic {
+  width: 70px !important;
+  height: 70px !important;
+  border-radius: 50%;
+}
+.location {
+  margin-top: -14px;
+}
