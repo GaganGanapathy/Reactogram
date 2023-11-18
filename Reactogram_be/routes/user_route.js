@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const { JWT_SECRET } = require("../config")
+require("dotenv").config()
 const UserModel = require("../models/user_model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
@@ -47,7 +47,7 @@ router.post("/login", async (req, res) => {
     }
     const didMatch = await bcrypt.compare(password, userInDB.password)
     if (didMatch) {
-      const jwtToken = jwt.sign({ _id: userInDB._id }, JWT_SECRET)
+      const jwtToken = jwt.sign({ _id: userInDB._id }, process.env.JWT_SECRET)
       const userInfo = {
         email: userInDB.email,
         fullName: userInDB.fullName,

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react"
 import Card from "./Card"
 import axios from "axios"
-import { API_BASE_URL } from "../config"
+import "dotenv/config"
 import Swal2 from "sweetalert2"
 
 function PostOverview() {
   const [allposts, setAllposts] = useState([])
   const getAllPosts = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/allposts`)
+      const response = await axios.get(`${process.env.API_BASE_URL}/allposts`)
       setAllposts(response.data.posts)
     } catch (error) {
       Swal2.fire({
@@ -21,11 +21,11 @@ function PostOverview() {
   const deletePost = async (postId) => {
     try {
       const response = await axios.delete(
-        `${API_BASE_URL}/deletepost/${postId}`,
+        `${process.env.API_BASE_URL}/deletepost/${postId}`,
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + localStorage.getItem("token"),
+            Authorization: "Bearer " + localStorage.getItem("token"),
           },
         }
       )
@@ -48,7 +48,12 @@ function PostOverview() {
         {allposts.map((post) => {
           return (
             <div className="col-md-4 mb-2">
-              <Card key={post._id} post={post} deletePost={deletePost}  getAllPosts={getAllPosts}/>
+              <Card
+                key={post._id}
+                post={post}
+                deletePost={deletePost}
+                getAllPosts={getAllPosts}
+              />
             </div>
           )
         })}

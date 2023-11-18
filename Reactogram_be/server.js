@@ -1,13 +1,13 @@
 const express = require("express")
+require("dotenv").config()
 const PORT = 4000
 const cors = require("cors")
 const mongoose = require("mongoose")
 const user_route = require("./routes/user_route")
 const post_route = require("./routes/post_route")
 const file_route = require("./routes/file_route")
-const { MONGO_DB_URL } = require("./config")
-
 const app = express()
+
 app.use(cors())
 app.use(express.json())
 app.use(user_route)
@@ -17,7 +17,10 @@ app.use(file_route)
 global.__basedir = __dirname
 
 mongoose
-  .connect(MONGO_DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.MONGO_DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("connected")
   })

@@ -4,7 +4,7 @@ import socialMobile from "../assets/social-mobile.png"
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
-import { API_BASE_URL } from "../config"
+import "dotenv/config"
 import swal2 from "sweetalert2"
 import { useDispatch } from "react-redux"
 import { loginSuccess } from "../redux/userSlice"
@@ -22,7 +22,7 @@ const Login = () => {
     try {
       e.preventDefault()
       setLoading(true)
-      const result = await axios.post(`${API_BASE_URL}/login`, {
+      const result = await axios.post(`${process.env.API_BASE_URL}/login`, {
         email,
         password,
       })

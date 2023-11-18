@@ -3,7 +3,7 @@ import socialDesktop from "../assets/social-desktop.png"
 import socialMobile from "../assets/social-mobile.png"
 import "../styles/login.css"
 import { Link, useNavigate } from "react-router-dom"
-import { API_BASE_URL } from "../config"
+import "dotenv/config"
 import swal2 from "sweetalert2"
 import axios from "axios"
 
@@ -18,7 +18,7 @@ const Signup = () => {
     try {
       e.preventDefault()
       setLoading(true)
-      const result = await axios.post(`${API_BASE_URL}/signup`, {
+      const result = await axios.post(`${process.env.API_BASE_URL}/signup`, {
         fullName,
         email,
         password,

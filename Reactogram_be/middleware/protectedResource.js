@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken")
-const { JWT_SECRET } = require("../config")
+require("dotenv").config()
 const UserModel = require("../models/user_model")
 
 module.exports = async (req, res, next) => {
@@ -9,7 +9,7 @@ module.exports = async (req, res, next) => {
     return res.status(401).json({ error: "User not logged in" })
   }
   const token = authorization.replace("Bearer ", "")
-  jwt.verify(token, JWT_SECRET, async (error, payload) => {
+  jwt.verify(token, process.env.JWT_SECRET, async (error, payload) => {
     if (error) {
       return res.status(402).json({ error: "Invalid Credentials" })
     }

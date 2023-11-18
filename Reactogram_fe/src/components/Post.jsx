@@ -2,10 +2,10 @@ import React, { useState } from "react"
 import { Modal } from "react-bootstrap"
 import horizontalMoreAction from "../assets/horizontalMoreAction.png"
 import Swal2 from "sweetalert2"
-import { API_BASE_URL } from "../config"
+import "dotenv/config"
 import axios from "axios"
 
-function Post({ post,getMyPosts }) {
+function Post({ post, getMyPosts }) {
   const [show, setShow] = useState(false)
 
   const handleClose = () => setShow(false)
@@ -13,17 +13,17 @@ function Post({ post,getMyPosts }) {
 
   const deletePost = async (postId) => {
     try {
-        setShow(false)
+      setShow(false)
       const response = await axios.delete(
-        `${API_BASE_URL}/deletepost/${postId}`,
+        `${process.env.API_BASE_URL}/deletepost/${postId}`,
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + localStorage.getItem("token"),
+            Authorization: "Bearer " + localStorage.getItem("token"),
           },
         }
-        )
-        getMyPosts()
+      )
+      getMyPosts()
     } catch (error) {
       Swal2.fire({
         icon: "error",

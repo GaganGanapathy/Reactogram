@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import "../styles/profile.css"
 import { Modal } from "react-bootstrap"
-import { API_BASE_URL } from "../config"
+import "dotenv/config"
 import axios from "axios"
 import swl2 from "sweetalert2"
 import { useNavigate } from "react-router-dom"
@@ -43,18 +43,24 @@ function Profile() {
   const handleImgUpload = async () => {
     let formData = new FormData()
     formData.append("file", image.data)
-    const response = axios.post(`${API_BASE_URL}/uploadFile`, formData)
+    const response = axios.post(
+      `${process.env.API_BASE_URL}/uploadFile`,
+      formData
+    )
     return response
   }
 
   const getMyPosts = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/myallposts`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      const response = await axios.get(
+        `${process.env.API_BASE_URL}/myallposts`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       if (response.status == 200) {
         setAllposts(response.data.posts)
       }
@@ -80,15 +86,15 @@ function Profile() {
     const request = {
       description: caption,
       location,
-      image: `${API_BASE_URL}/files/${imgRes.data.filename}`,
+      image: `${process.env.API_BASE_URL}/files/${imgRes.data.filename}`,
     }
     const postResponse = await axios.post(
-      `${API_BASE_URL}/createpost`,
+      `${process.env.API_BASE_URL}/createpost`,
       request,
       {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       }
     )
