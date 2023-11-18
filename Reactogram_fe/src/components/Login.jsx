@@ -4,7 +4,6 @@ import socialMobile from "../assets/social-mobile.png"
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
-import "dotenv/config"
 import swal2 from "sweetalert2"
 import { useDispatch } from "react-redux"
 import { loginSuccess } from "../redux/userSlice"
@@ -22,10 +21,13 @@ const Login = () => {
     try {
       e.preventDefault()
       setLoading(true)
-      const result = await axios.post(`${process.env.API_BASE_URL}/login`, {
-        email,
-        password,
-      })
+      const result = await axios.post(
+        `${import.meta.VITE_API_BASE_URL}/login`,
+        {
+          email,
+          password,
+        }
+      )
       if (result.status == 200) {
         setLoading(false)
         localStorage.setItem("token", result.data.result.token)

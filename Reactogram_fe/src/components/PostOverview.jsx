@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react"
 import Card from "./Card"
 import axios from "axios"
-import "dotenv/config"
 import Swal2 from "sweetalert2"
 
 function PostOverview() {
   const [allposts, setAllposts] = useState([])
   const getAllPosts = async () => {
     try {
-      const response = await axios.get(`${process.env.API_BASE_URL}/allposts`)
+      const response = await axios.get(
+        `${import.meta.VITE_API_BASE_URL}/allposts`
+      )
       setAllposts(response.data.posts)
     } catch (error) {
       Swal2.fire({
@@ -21,7 +22,7 @@ function PostOverview() {
   const deletePost = async (postId) => {
     try {
       const response = await axios.delete(
-        `${process.env.API_BASE_URL}/deletepost/${postId}`,
+        `${import.meta.VITE_API_BASE_URL}/deletepost/${postId}`,
         {
           headers: {
             "Content-Type": "application/json",

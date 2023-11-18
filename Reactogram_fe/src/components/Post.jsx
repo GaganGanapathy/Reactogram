@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import { Modal } from "react-bootstrap"
 import horizontalMoreAction from "../assets/horizontalMoreAction.png"
 import Swal2 from "sweetalert2"
-import "dotenv/config"
 import axios from "axios"
 
 function Post({ post, getMyPosts }) {
@@ -15,7 +14,7 @@ function Post({ post, getMyPosts }) {
     try {
       setShow(false)
       const response = await axios.delete(
-        `${process.env.API_BASE_URL}/deletepost/${postId}`,
+        `${import.meta.VITE_API_BASE_URL}/deletepost/${postId}`,
         {
           headers: {
             "Content-Type": "application/json",

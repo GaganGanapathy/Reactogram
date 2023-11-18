@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import "../styles/profile.css"
 import { Modal } from "react-bootstrap"
-import "dotenv/config"
 import axios from "axios"
 import swl2 from "sweetalert2"
 import { useNavigate } from "react-router-dom"
@@ -44,7 +43,7 @@ function Profile() {
     let formData = new FormData()
     formData.append("file", image.data)
     const response = axios.post(
-      `${process.env.API_BASE_URL}/uploadFile`,
+      `${import.meta.VITE_API_BASE_URL}/uploadFile`,
       formData
     )
     return response
@@ -53,7 +52,7 @@ function Profile() {
   const getMyPosts = async () => {
     try {
       const response = await axios.get(
-        `${process.env.API_BASE_URL}/myallposts`,
+        `${import.meta.VITE_API_BASE_URL}/myallposts`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -86,10 +85,10 @@ function Profile() {
     const request = {
       description: caption,
       location,
-      image: `${process.env.API_BASE_URL}/files/${imgRes.data.filename}`,
+      image: `${import.meta.VITE_API_BASE_URL}/files/${imgRes.data.filename}`,
     }
     const postResponse = await axios.post(
-      `${process.env.API_BASE_URL}/createpost`,
+      `${import.meta.VITE_API_BASE_URL}/createpost`,
       request,
       {
         headers: {

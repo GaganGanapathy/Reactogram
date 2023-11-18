@@ -3,7 +3,6 @@ import moreAction from "../assets/more-action.png"
 import { useSelector } from "react-redux"
 import axios from "axios"
 import { useState } from "react"
-import "dotenv/config"
 import Swal2 from "sweetalert2"
 
 function Card({ post, deletePost, getAllPosts }) {
@@ -16,7 +15,7 @@ function Card({ post, deletePost, getAllPosts }) {
 
   const like = async (postId) => {
     const response = await axios.put(
-      `${process.env.API_BASE_URL}/like`,
+      `${import.meta.VITE_API_BASE_URL}/like`,
       {
         postId,
       },
@@ -36,7 +35,7 @@ function Card({ post, deletePost, getAllPosts }) {
   const submitComment = async (postId) => {
     try {
       const response = await axios.put(
-        `${process.env.API_BASE_URL}/comment`,
+        `${import.meta.VITE_API_BASE_URL}/comment`,
         {
           postId,
           commentText: comment,
@@ -64,7 +63,7 @@ function Card({ post, deletePost, getAllPosts }) {
 
   const unlike = async (postId) => {
     const response = await axios.put(
-      `${process.env.API_BASE_URL}/unlike`,
+      `${import.meta.VITE_API_BASE_URL}/unlike`,
       {
         postId,
       },
