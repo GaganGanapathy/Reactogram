@@ -15,7 +15,7 @@ function Card({ post, deletePost, getAllPosts }) {
 
   const like = async (postId) => {
     const response = await axios.put(
-      `${import.meta.VITE_API_BASE_URL}/like`,
+      `${import.meta.env.VITE_API_BASE_URL}/like`,
       {
         postId,
       },
@@ -35,7 +35,7 @@ function Card({ post, deletePost, getAllPosts }) {
   const submitComment = async (postId) => {
     try {
       const response = await axios.put(
-        `${import.meta.VITE_API_BASE_URL}/comment`,
+        `${import.meta.env.VITE_API_BASE_URL}/comment`,
         {
           postId,
           commentText: comment,
@@ -63,7 +63,7 @@ function Card({ post, deletePost, getAllPosts }) {
 
   const unlike = async (postId) => {
     const response = await axios.put(
-      `${import.meta.VITE_API_BASE_URL}/unlike`,
+      `${import.meta.env.VITE_API_BASE_URL}/unlike`,
       {
         postId,
       },

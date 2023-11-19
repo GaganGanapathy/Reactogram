@@ -14,7 +14,7 @@ function Post({ post, getMyPosts }) {
     try {
       setShow(false)
       const response = await axios.delete(
-        `${import.meta.VITE_API_BASE_URL}/deletepost/${postId}`,
+        `${import.meta.env.VITE_API_BASE_URL}/deletepost/${postId}`,
         {
           headers: {
             "Content-Type": "application/json",

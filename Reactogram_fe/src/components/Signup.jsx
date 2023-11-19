@@ -18,7 +18,7 @@ const Signup = () => {
       e.preventDefault()
       setLoading(true)
       const result = await axios.post(
-        `${import.meta.VITE_API_BASE_URL}/signup`,
+        `${import.meta.env.VITE_API_BASE_URL}/signup`,
         {
           fullName,
           email,

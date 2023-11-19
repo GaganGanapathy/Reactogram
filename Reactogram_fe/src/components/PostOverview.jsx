@@ -8,7 +8,7 @@ function PostOverview() {
   const getAllPosts = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.VITE_API_BASE_URL}/allposts`
+        `${import.meta.env.VITE_API_BASE_URL}/allposts`
       )
       setAllposts(response.data.posts)
     } catch (error) {
@@ -22,7 +22,7 @@ function PostOverview() {
   const deletePost = async (postId) => {
     try {
       const response = await axios.delete(
-        `${import.meta.VITE_API_BASE_URL}/deletepost/${postId}`,
+        `${import.meta.env.VITE_API_BASE_URL}/deletepost/${postId}`,
         {
           headers: {
             "Content-Type": "application/json",
