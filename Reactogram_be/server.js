@@ -28,6 +28,15 @@ mongoose
     console.log(err)
   })
 
+app.get("*.js", function (req, res, next) {
+  res.type("application/javascript")
+  next()
+})
+
+app.get("kaboom", (req, res) => {
+  res.send("working")
+})
+
 app.get("/welcome", (req, res) => {
   res.status(200).json({ msg: "HELLO WORLD!!!" })
 })
